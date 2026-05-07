@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("JS is working");
 
-    let slides = document.querySelectorAll(".slide");
-    let dots = document.querySelectorAll(".dot");
-    let nextBtn = document.querySelector(".next");
-    let prevBtn = document.querySelector(".prev");
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+    const nextBtn = document.querySelector(".next");
+    const prevBtn = document.querySelector(".prev");
 
     let currentIndex = 0;
     let autoPlayInterval;
@@ -14,8 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
         slides.forEach(slide => slide.classList.remove("active"));
         dots.forEach(dot => dot.classList.remove("active"));
 
-        slides[index].classList.add("active");
-        dots[index].classList.add("active");
+        if (slides[index]) {
+            slides[index].classList.add("active");
+        }
+        if (dots[index]) {
+            dots[index].classList.add("active");
+        }
     }
 
     function nextSlide() {
@@ -45,30 +49,50 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Manual navigation - Next button
-    nextBtn.addEventListener("click", () => {
-        nextSlide();
-        startAutoPlay(); // Reset timer on manual interaction
-    });
-
-    // Manual navigation - Previous button
-    prevBtn.addEventListener("click", () => {
-        prevSlide();
-        startAutoPlay(); // Reset timer on manual interaction
-    });
-
-    // Dot navigation - click to jump to specific slide
-    dots.forEach((dot, index) => {
-        dot.addEventListener("click", () => {
-            currentIndex = index;
-            showSlide(currentIndex);
+    if (slides.length && dots.length && nextBtn && prevBtn) {
+        // Manual navigation - Next button
+        nextBtn.addEventListener("click", () => {
+            nextSlide();
             startAutoPlay(); // Reset timer on manual interaction
         });
-    });
 
-    // Auto-change slides every 4 seconds
-    startAutoPlay();
+        // Manual navigation - Previous button
+        prevBtn.addEventListener("click", () => {
+            prevSlide();
+            startAutoPlay(); // Reset timer on manual interaction
+        });
+
+        // Dot navigation - click to jump to specific slide
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                currentIndex = index;
+                showSlide(currentIndex);
+                startAutoPlay(); // Reset timer on manual interaction
+            });
+        });
+
+        // Auto-change slides every 4 seconds
+        startAutoPlay();
+    }
+
+    const themeToggleBtn = document.getElementById("theme-toggle");
+
+    function setTheme(theme) {
+        const isDark = theme === "dark";
+        document.body.classList.toggle("dark-theme", isDark);
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+        if (themeToggleBtn) {
+            themeToggleBtn.textContent = isDark ? "Light Mode" : "Dark Mode";
+        }
+    }
+
+    const savedTheme = localStorage.getItem("theme");
+    setTheme(savedTheme === "dark" ? "dark" : "light");
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", () => {
+            const newTheme = document.body.classList.contains("dark-theme") ? "light" : "dark";
+            setTheme(newTheme);
+        });
+    }
 });
-
-
-
