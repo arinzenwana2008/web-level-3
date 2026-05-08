@@ -265,29 +265,32 @@ footer {
     padding: 20px;
 }
 
-.forum-container {
+.forums-container, .forum-container {
     max-width: 800px;
     margin: 30px auto;
     padding: 20px;
-    background: #f0f0f0;
+    background: var(--secondary);
     border-radius: 8px;
+    color: var(--text);
 }
 
 .forum-group {
     margin-bottom: 20px;
-} 
+}
 
 .forum-group h3 {
     background: var(--primary);
+    color: white;
     padding: 10px;
     margin: 0;
     border-radius: 5px 5px 0 0;
 }
 
 .forum-item {
-    background: white;
+    background: var(--background);
+    color: var(--text);
     padding: 12px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
     cursor: pointer;
 }
 
@@ -296,7 +299,7 @@ footer {
 }
 
 .forum-item:hover {
-    background: #e6f7ff;
+    background: rgba(255,255,255,0.08);
 }
 
 .bio-page {
@@ -394,7 +397,7 @@ footer {
     display: flex;
     justify-content: center;
     gap: 50px;
-    background: #eaeaea;
+    background: var(--secondary);
     padding: 30px;
     border-radius: 15px;
     max-width: 900px;
@@ -408,12 +411,14 @@ footer {
 
 .contact-form h3 {
     margin-bottom: 15px;
+    color: var(--text);
 }
 
 .contact-form label {
     display: block;
     margin-top: 10px;
     font-size: 14px;
+    color: var(--text);
 }
 
 .contact-form input,
@@ -421,8 +426,10 @@ footer {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
-    border: none;
+    border: 1px solid rgba(255,255,255,0.12);
     border-radius: 5px;
+    background: var(--background);
+    color: var(--text);
 }
 
 .submit-btn {
@@ -430,6 +437,7 @@ footer {
     width: 100%;
     padding: 10px;
     background: var(--accent);
+    color: var(--text);
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -444,10 +452,12 @@ footer {
 .team-info {
     flex: 1;
     text-align: left;
+    color: var(--text);
 }
 
 .team-info h3 {
     margin-bottom: 15px;
+    color: var(--text);
 } 
 
 .team-info p {
